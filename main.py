@@ -1,4 +1,3 @@
-
 import os
 from tsmorph import TSmorphing
 from extract_perf import Extract_Performance
@@ -9,7 +8,6 @@ import numpy as np
 from scipy.stats import pearsonr
 from matplotlib.colors import Normalize
 
-#plt.rcParams.update({'font.size': 40})
 
 # NN5 data
 nn5 = pd.read_csv("./data/NN5_preproc.csv")
@@ -122,14 +120,14 @@ def morph_evaluate(alg):
     l = list_filenames(f"./results/{alg}/performance")
     performances = pd.DataFrame()
     for i in l:
-        performances[i.split(".")[0]] = pd.read_csv(f"./results/{alg}/performance/"+i)["LSTM"]
+        performances[i.split(".")[0]] = pd.read_csv(f"./results/{alg}/performance/"+i)[alg]
 
     for j in list_cor:
         plot_results(performances, j, alg)
 
 
-#algs = ["LSTM", "Informer", "NHITS"]
-algs = ["LSTM"]
+algs = ["LSTM", "Informer", "NHITS"]
+#algs = ["LSTM"]
 
 for alg in algs:
     morph_evaluate(alg=alg)

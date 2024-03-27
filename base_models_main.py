@@ -4,6 +4,8 @@ from base_models import Base_Models
 from multiprocessing import Pool
 from sklearn.impute import SimpleImputer
 import psutil
+import logging
+logging.getLogger("pytorch_lightning").setLevel(logging.WARNING)
 
 
 nn5 = pd.read_csv("./data/NN5_preproc.csv")
@@ -17,8 +19,8 @@ def forecast(i):
     name = train.name
     h = 56 
     b = Base_Models(train=train, h=h)
-    #return [[name, "lstm"]+b.lstm(),[name, "nhits"]+b.nhits(),[name, "informer"]+b.informer(),[name, "test"]+test]
-    return [[name, "lstm"]+b.lstm(),[name, "test"]+test]
+    return [[name, "lstm"]+b.lstm(),[name, "nhits"]+b.nhits(),[name, "informer"]+b.informer(),[name, "test"]+test]
+    #return [[name, "lstm"]+b.lstm(),[name, "test"]+test]
 
 
 if __name__ == '__main__':

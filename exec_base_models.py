@@ -4,6 +4,8 @@ import pandas as pd
 from sklearn.impute import SimpleImputer
 from mfe import MFE
 import numpy as np
+import logging
+logging.getLogger("pytorch_lightning").setLevel(logging.WARNING)
 
 nn5 = pd.read_csv("./data/NN5.csv", delimiter=";", decimal=",")
 nn5 = nn5.iloc[:,:]

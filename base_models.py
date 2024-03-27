@@ -3,7 +3,7 @@ import numpy as np
 from neuralforecast import NeuralForecast
 from neuralforecast.tsdataset import TimeSeriesDataset
 from neuralforecast.models import LSTM, NHITS, Informer
-
+import shutil
 
 class Base_Models:
 
@@ -16,7 +16,7 @@ class Base_Models:
         Y_df['unique_id'] = 1.
         Y_df = Y_df.rename(columns={'index': 'ds', Y_df.iloc[:,1].name: 'y'})
         Y_df = Y_df[['unique_id', 'ds', 'y']]
-        model = LSTM(h=self.h, max_steps=500)
+        model = LSTM(h=self.h, max_steps=1, enable_checkpointing=False, logger=False)
         nf = NeuralForecast(models=[model], freq='D')
         nf.fit(df=Y_df)
         return nf.predict()["LSTM"].to_list()
@@ -26,7 +26,7 @@ class Base_Models:
         Y_df['unique_id'] = 1.
         Y_df = Y_df.rename(columns={'index': 'ds', Y_df.iloc[:,1].name: 'y'})
         Y_df = Y_df[['unique_id', 'ds', 'y']]
-        model = NHITS(h=self.h, max_steps=500, input_size=2 * self.h)
+        model = NHITS(h=self.h, max_steps=1, input_size=2 * self.h, enable_checkpointing=False, logger=False)
         nf = NeuralForecast(models=[model], freq='D')
         nf.fit(df=Y_df)
         return nf.predict()["NHITS"].to_list()
@@ -36,7 +36,7 @@ class Base_Models:
         Y_df['unique_id'] = 1.
         Y_df = Y_df.rename(columns={'index': 'ds',  Y_df.iloc[:,1].name: 'y'})
         Y_df = Y_df[['unique_id', 'ds', 'y']]
-        model = Informer(h=self.h, max_steps=500,input_size=2 * self.h)
+        model = Informer(h=self.h, max_steps=1,input_size=2 * self.h, scaler_type = 'robust', enable_checkpointing=False, logger=False)
         nf = NeuralForecast(models=[model], freq='D')
         nf.fit(df=Y_df)
         return nf.predict()["Informer"].to_list()
