@@ -1,5 +1,4 @@
 import pandas as pd
-import tsfel
 from pycatch22 import catch22_all
 
 class MFE:
