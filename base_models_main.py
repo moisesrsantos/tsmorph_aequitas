@@ -25,7 +25,7 @@ def forecast(i):
 
 if __name__ == '__main__':
     cpus = psutil.cpu_count()
-    with Pool(cpus) as p:
+    with Pool(cpus-1) as p:
         forecasting = p.map(forecast, range(nn5_train.shape[1]))
     
     col = ["id", "model", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17",
