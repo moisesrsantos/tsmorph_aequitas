@@ -5,7 +5,7 @@ from mfe import MFE
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
-from scipy.stats import pearsonr
+from scipy.stats import pearsonr, spearmanr
 from matplotlib.colors import Normalize
 
 
@@ -110,7 +110,7 @@ def morph_evaluate(alg):
         
     # Calcular correlação entre meta-feature com a diferença de performance
         for j in mfe.columns.to_list():       
-            df_cor.loc[df_cor.shape[0]] = ["{}".format(source_list[i], target_list), j, pearsonr(perf[alg],mfe[j])[0]]
+            df_cor.loc[df_cor.shape[0]] = ["{}".format(source_list[i], target_list), j, spearmanr(perf[alg],mfe[j])[0]]
 
     csv_cor = df_cor.drop(["pair"], axis=1).groupby('mf').agg([np.std,np.mean]).sort_values(by=[('correlation','std')], ascending=[True])
     csv_cor.columns = ['_'.join(col) for col in csv_cor.columns.values]
