@@ -36,7 +36,7 @@ class Base_Models:
         Y_df['unique_id'] = 1.
         Y_df = Y_df.rename(columns={'index': 'ds',  Y_df.iloc[:,1].name: 'y'})
         Y_df = Y_df[['unique_id', 'ds', 'y']]
-        model = Informer(h=self.h, max_steps=500,input_size=2 * self.h, scaler_type = 'robust', enable_checkpointing=False, logger=False)
+        model = Informer(h=self.h, max_steps=100,input_size=2 * self.h, scaler_type = 'robust', enable_checkpointing=False, logger=False)
         nf = NeuralForecast(models=[model], freq='D')
         nf.fit(df=Y_df)
         return nf.predict()["Informer"].to_list()
