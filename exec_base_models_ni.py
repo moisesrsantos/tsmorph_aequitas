@@ -15,9 +15,9 @@ nn5_imp = imp_mean.fit_transform(nn5)
 nn5 = pd.DataFrame(nn5_imp, index=nn5.index, columns=nn5.columns)
 nn5.to_csv("./data/NN5_preproc.csv", index=None)
 
-os.system('python base_models_main.py')
+os.system('python base_models_main_ni.py')
 
 
-Extract_Performance(filename="NN5.csv", morphing=False, train=nn5).fit_transform()
-performance = pd.read_csv("./data/performance/mase_nn5.csv", index_col="id")
+Extract_Performance(filename="NN5_ni.csv", morphing=False, train=nn5).fit_transform()
+performance = pd.read_csv("./data/performance/mase_nn5_ni.csv", index_col="id")
 
