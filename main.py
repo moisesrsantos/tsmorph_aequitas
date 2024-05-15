@@ -5,7 +5,7 @@ from mfe import MFE
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
-from scipy.stats import pearsonr, spearmanr
+from scipy.stats import pearsonr
 from matplotlib.colors import Normalize
 
 
@@ -99,7 +99,6 @@ def morph_evaluate(alg):
         # Extract meta-features 
         morph_n = pd.read_csv("./results/{}/morph/nn5_morph_{}_{}.csv".format(alg,source_list[i], target_list))
         mfe = MFE(series = morph_n.iloc[:735,:]).catch22
-        #mfe.columns = mfe.columns.str.lstrip("S2T_0__")
         mfe.to_csv("./results/{}/mf/nn5_morph_{}_{}.csv".format(alg,source_list[i], target_list), index=False)
 
         # Extract performance for morphing
@@ -110,7 +109,7 @@ def morph_evaluate(alg):
         
     # Calcular correlação entre meta-feature com a diferença de performance
         for j in mfe.columns.to_list():       
-            df_cor.loc[df_cor.shape[0]] = ["{}".format(source_list[i], target_list), j, spearmanr(perf[alg],mfe[j])[0]]
+            df_cor.loc[df_cor.shape[0]] = ["{}".format(source_list[i], target_list), j, pearsonr(perf[alg],mfe[j])[0]]
 
     csv_cor = df_cor.drop(["pair"], axis=1).groupby('mf').agg([np.std,np.mean]).sort_values(by=[('correlation','std')], ascending=[True])
     csv_cor.columns = ['_'.join(col) for col in csv_cor.columns.values]
@@ -125,9 +124,8 @@ def morph_evaluate(alg):
     for j in list_cor:
         plot_results(performances, j, alg)
 
+algs = ["DeepAR", "LSTM"]
 
-algs = ["LSTM", "Informer", "NHITS"]
-#algs = ["LSTM"]
 
 for alg in algs:
     morph_evaluate(alg=alg)

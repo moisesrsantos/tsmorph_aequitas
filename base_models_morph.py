@@ -20,10 +20,8 @@ def forecast(i):
     b = Base_Models(train=train, h=h)
     if alg == "LSTM":
         return [[i, "lstm"]+b.lstm(),[i, "test"]+test]
-    if alg == "Informer":
-        return [[i, "informer"]+b.informer(),[i, "test"]+test]
-    if alg == "NHITS":
-        return [[i, "nhits"]+b.nhits(),[i, "test"]+test]
+    if alg == "DeepAR":
+        return [[i, "deepar"]+b.deepar(),[i, "test"]+test]
 
 if __name__ == '__main__':
     

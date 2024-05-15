@@ -3,8 +3,8 @@ channels:
   - defaults
 dependencies:
   - python=3.8
-  - numpy=1.22.4
-  - scipy=1.8.1                    
+  - numpy
+  - scipy                
   - pip
   - pip:
     - neuralforecast
@@ -12,4 +12,6 @@ dependencies:
     - pandas
     - scikit-learn
     - matplotlib
+    - sktime
+    - psutil
 

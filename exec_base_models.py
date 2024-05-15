@@ -17,7 +17,4 @@ nn5.to_csv("./data/NN5_preproc.csv", index=None)
 
 os.system('python base_models_main.py')
 
-
 Extract_Performance(filename="NN5.csv", morphing=False, train=nn5).fit_transform()
-performance = pd.read_csv("./data/performance/mase_nn5.csv", index_col="id")
-

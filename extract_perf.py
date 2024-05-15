@@ -1,5 +1,5 @@
 import pandas as pd
-from sktime.performance_metrics.forecasting import MeanAbsoluteScaledError
+from sktime.performance_metrics.forecasting import MeanAbsoluteScaledError, MeanAbsoluteError
 
 
 class Extract_Performance:
@@ -19,8 +19,8 @@ class Extract_Performance:
             data = pd.read_csv("./data/forecast/"+self.filename)
             error = {"id": list(),
             "LSTM": list(),
-            "Informer": list(),
-            "NHITS": list()}
+            "DeepAR": list()
+            }
         groups = data.groupby("id")
 
         if self.morphing:
@@ -38,16 +38,14 @@ class Extract_Performance:
         else:
             for i in data["id"].unique():
                 lstm = groups.get_group(i).loc[groups.get_group(i)["model"] == "lstm",:].iloc[:,2:].values[0]
-                nhits = groups.get_group(i).loc[groups.get_group(i)["model"] == "nhits",:].iloc[:,2:].values[0]
-                informer = groups.get_group(i).loc[groups.get_group(i)["model"] == "informer",:].iloc[:,2:].values[0]
+                deepar = groups.get_group(i).loc[groups.get_group(i)["model"] == "deepar",:].iloc[:,2:].values[0]
                 test = groups.get_group(i).loc[groups.get_group(i)["model"] == "test",:].iloc[:,2:].values[0]
                 y_train = self.train.iloc[:735,:]
                 y_train = y_train.loc[:,i].values
                 mase = MeanAbsoluteScaledError()
                 error["id"].append(i)
                 error["LSTM"].append(mase(test,lstm, y_train=y_train))
-                error["Informer"].append(mase(test,informer, y_train=y_train))
-                error["NHITS"].append(mase(test,nhits, y_train=y_train))
+                error["DeepAR"].append(mase(test,deepar, y_train=y_train))
             error_perf = pd.DataFrame(error)
             
             error_perf.to_csv("./data/performance/mase_"+self.filename, index=False)

@@ -19,9 +19,7 @@ def forecast(i):
     name = train.name
     h = 56 
     b = Base_Models(train=train, h=h)
-    return [[name, "lstm"]+b.lstm(),[name, "nhits"]+b.nhits(),[name, "informer"]+b.informer(),[name, "test"]+test]
-    #return [[name, "lstm"]+b.lstm(),[name, "test"]+test]
-
+    return [[name, "lstm"]+b.lstm(),[name, "deepar"]+b.deepar(),[name, "test"]+test]
 
 if __name__ == '__main__':
     cpus = psutil.cpu_count()
