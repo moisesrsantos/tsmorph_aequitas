@@ -2,7 +2,7 @@
 
 ## Overview
 
-This repository is dedicated to implementing experiments related to the paper submitted to AEQUITAS 2024 co-located with ECAI 2024.
+This repository is dedicated to implementing experiments related to the paper accepted at AEQUITAS 2024 co-located with ECAI 2024.
 
 ## How to reproduce the results
 
