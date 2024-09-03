@@ -1,4 +1,4 @@
-# tsMorph: generation of synthetic time series to understand algorithm performance
+# Enhancing Algorithm Performance Understanding through tsMorph: Generating Semi-Synthetic Time Series for Robust Forecasting Evaluation
 
 ## Overview
 
@@ -7,7 +7,7 @@ This repository is dedicated to implementing experiments related to the paper su
 ## How to reproduce the results
 
 ### Conda installation
-In this implementation we use the **conda environment**, an open-source package and environment management system that runs on Windows, macOS, and Linux.
+In this implementation, we use the **conda environment**, an open-source package and environment management system that runs on Windows, macOS, and Linux.
 On [this page](https://www.anaconda.com/products/distribution) you can find the Anaconda distribution for your specific OS.
 
 ### Setup conda environment
@@ -44,7 +44,7 @@ Run the main code
 
 The raw results are in the "./results/" folder.
 
-In this folder we have two subfolders referring to the two forecasting algorithms: "./results/LSTM" and "./results/DeepAR".
+This folder has two subfolders referring to the two forecasting algorithms: "./results/LSTM" and "./results/DeepAR."
 
 The main subfolders of these experiments are:
 
